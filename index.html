@@ -105,7 +105,6 @@
         player.style.display = 'none';
         video.src = "images/" + strPath + "/" + count + "_animation_" + strColor + ".mp4";
         player.setAttribute('poster',"images/" + strPath + "/" + count + "_freezeframe_" + strColor + ".jpg");
-        
         player.load();
 
         // set postion of description.
@@ -136,7 +135,8 @@
       
       if(count == 11){
         video.src = "images/" + strPath + "/1_animation_" + strColor + ".mp4";
-        player.load();
+        player.setAttribute('poster',"images/" + strPath + "/1_freezeframe_" + strColor + ".jpg");
+    player.load();
         sneaker.src = "images/" + strPath + "/1_freezeframe_" + strColor + ".jpg";
         sneaker.style.display = 'block';
         myCarousel.style.display = 'block';
@@ -160,11 +160,12 @@
         stateSneaker = 1;
         //player.play();
       } else {
-        
+    player.setAttribute('poster',"images/" + strPath + "/" + (position - 1) + "_freezeframe_" + strColor + ".jpg");
+    player.style.display = 'block';
         sneaker.style.display = 'none';
         descriptionLabel.style.display = 'none';
         player.play(); 
-        player.style.display = 'block';
+
         console.log(count);
       }
       
@@ -179,14 +180,16 @@
         strColor = "blue";
         sneaker.src = "images/" + strPath + "/" + (position - 1) + "_freezeframe_" + strColor + ".jpg"; 
         video.src = "images/" + strPath + "/" + position + "_animation_" + strColor + ".mp4"; 
-        player.load();
+        player.setAttribute('poster',"images/" + strPath + "/" + position + "_freezeframe_" + strColor + ".jpg");
+    player.load();
 
       } else if (n == 2) {
         strPath = "JetBlack";
         strColor = "black";
         sneaker.src = "images/" + strPath + "/" + (position - 1) + "_freezeframe_" + strColor + ".jpg";
         video.src = "images/" + strPath + "/" + position + "_animation_" + strColor + ".mp4";
-        player.load();
+        player.setAttribute('poster',"images/" + strPath + "/" + position + "_freezeframe_" + strColor + ".jpg");
+    player.load();
 
       } else if (n == 12){
         position = n - 2;
@@ -219,7 +222,8 @@
         count = n - 2;
 
         video.src = "images/" + strPath + "/" + (n - 2) + "_animation_" + strColor + ".mp4";
-        player.load();
+        player.setAttribute('poster',"images/" + strPath + "/" + (n - 3) + "_freezeframe_" + strColor + ".jpg");
+    player.load();
         position = n - 2;
         if (n == 3)
           n++;
