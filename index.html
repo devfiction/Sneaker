@@ -98,6 +98,7 @@
 
         if( count == 1)
           count++;
+    
         sneaker.src = "images/" + strPath + "/" + (count - 1) + "_freezeframe_" + strColor + ".jpg";
         sneaker.style.display = 'block';
         sneaker.style.width = '999px';
@@ -108,10 +109,13 @@
         player.load();
 
         // set postion of description.
-        descriptionLabel.style.display = 'inline';
-        descriptionLabel.style.position = 'absolute';
-        descriptionLabel.innerHTML = descriptions[count-2];
+        setTimeout(function() {
+          descriptionLabel.style.display = 'inline';
+          descriptionLabel.style.position = 'absolute';
+          descriptionLabel.innerHTML = descriptions[count-2];
 
+        }, 100)
+        
         setTimeout(function() {
           
           for(i = 3; i <= 12; i++) {
@@ -136,7 +140,7 @@
       if(count == 11){
         video.src = "images/" + strPath + "/1_animation_" + strColor + ".mp4";
         player.setAttribute('poster',"images/" + strPath + "/1_freezeframe_" + strColor + ".jpg");
-    player.load();
+        player.load();
         sneaker.src = "images/" + strPath + "/1_freezeframe_" + strColor + ".jpg";
         sneaker.style.display = 'block';
         myCarousel.style.display = 'block';
@@ -160,12 +164,12 @@
         stateSneaker = 1;
         //player.play();
       } else {
-    player.setAttribute('poster',"images/" + strPath + "/" + (position - 1) + "_freezeframe_" + strColor + ".jpg");
-    player.style.display = 'block';
+        player.setAttribute('poster',"images/" + strPath + "/" + (position - 1) + "_freezeframe_" + strColor + ".jpg");
+        player.style.display = 'block';
         sneaker.style.display = 'none';
         descriptionLabel.style.display = 'none';
         player.play(); 
-
+        //player.setAttribute('poster',"images/" + strPath + "/" + (position) + "_freezeframe_" + strColor + ".jpg");
         console.log(count);
       }
       
