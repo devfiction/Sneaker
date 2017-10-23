@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!--<script src="http://code.jquery.com/jquery-latest.min.js"></script>-->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body onload = loadFunction()>
+  <table border="0" style="width: 100%; height: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+    <tr height="100%">
+      <td align="center">
+        <div id="firstLabel">A design just as self-assured,<br>detailed, and humble as coach</div>
+        <div class="image" >
+          <div id="wrapper">
+            <video id="player" playsinline>
+              <source id="video" src = "images/HeritageBlue/1_animation_blue.mp4" type="video/mp4">
+            </video>
+            <img id="sneaker" src="images/HeritageBlue/1_freezeframe_blue.jpg" />
+          </div>
+          <div id="description" align="center"></div>
+          <div style="text-align:center" id="myCarousel">
+            <span class="dot1" onclick="currentSlide(1)"></span> 
+            <span class="dot2" onclick="currentSlide(2)"></span> 
+            <span class="dot" id="dot3" onclick="currentSlide(3)"></span> 
+            <span class="dot" id="dot4" onclick="currentSlide(4)"></span> 
+            <span class="dot" id="dot5" onclick="currentSlide(5)"></span> 
+            <span class="dot" id="dot6" onclick="currentSlide(6)"></span> 
+            <span class="dot" id="dot7" onclick="currentSlide(7)"></span> 
+            <span class="dot" id="dot8" onclick="currentSlide(8)"></span> 
+            <span class="dot" id="dot9" onclick="currentSlide(9)"></span> 
+            <span class="dot" id="dot10" onclick="currentSlide(10)"></span> 
+            <span class="dot" id="dot11" onclick="currentSlide(11)"></span> 
+            <span class="dot" id="dot12" onclick="currentSlide(12)"></span>
+          </div>
+        </div>
+        <img id="logo" src="images/fabled_logo.png" />
+      </td>
+    </tr>
+  </table>
+
+  <script>
+
+    var count = 2; 
+    var strPath = "HeritageBlue";
+    var strColor = "blue";
+    var descriptions = ["Stitchless quilted collar for flexibility and comfort", "Wooden's iconic eyeglass hidden in logo", 
+        "5 stars on each heel for 10 championships", "Achilles cradle made of basketball uniform material", 
+        "Silhouette based on basketball heritage", "Premium materials", "Feather-ligh at  7.5 oz",
+        "Sole design inspired by Pyramid of Success", "Signature Fabled footbeds"];
+
+    var player = document.getElementById('player');
+    var video = document.getElementById('video');
+    var descriptionLabel = document.getElementById('description');
+    var firstLabel = document.getElementById('firstLabel');
+    var myCarousel = document.getElementById('myCarousel');
+    var logo = document.getElementById('logo');
+    var sneaker = document.getElementById('sneaker');
+    var stateSneaker = 1;
+    var stateCarousel = 1;
+    var position = 1;
+    function loadFunction() {
+
+      $('#firstLabel').fadeIn(1000);
+      $('#firstLabel').fadeOut(1000);
+
+      setTimeout(function() {
+
+        firstLabel.style.display = 'none';
+        video.src = "images/" + strPath + "/1_animation_" + strColor + ".mp4";
+        sneaker.src = "images/" + strPath + "/1_freezeframe_" + strColor + ".jpg";
+        sneaker.style.display = 'none';
+        myCarousel.style.display = 'block';
+        player.style.display = 'block';
+        player.play();
+      
+      }, 2500);
+      var i = 0;
+      var strId = "";
+
+      for(i = 3; i <= 12; i++) {
+        strId = "dot" + i;
+        document.getElementById(strId).style.backgroundColor = '#dddddd';
+      }
+
+      strId = "dot" + (count + 1);
+      document.getElementById(strId).style.backgroundColor = '#777777';
+
+      $('#player').bind('ended', function() {
+
+        if (stateSneaker == 2 ) {
+          count++;
+          stateSneaker = 1;
+        }
+
+        if( count == 1)
+          count++;
+        sneaker.src = "images/" + strPath + "/" + (count - 1) + "_freezeframe_" + strColor + ".jpg";
+        sneaker.style.display = 'block';
+        sneaker.style.width = '999px';
+
+        player.style.display = 'none';
+        video.src = "images/" + strPath + "/" + count + "_animation_" + strColor + ".mp4";
+        player.setAttribute('poster',"images/" + strPath + "/" + count + "_freezeframe_" + strColor + ".jpg");
+        
+        player.load();
+
+        // set postion of description.
+        descriptionLabel.style.display = 'inline';
+        descriptionLabel.style.position = 'absolute';
+        descriptionLabel.innerHTML = descriptions[count-2];
+
+        setTimeout(function() {
+          
+          for(i = 3; i <= 12; i++) {
+            strId = "dot" + i;
+            document.getElementById(strId).style.backgroundColor = '#dddddd';
+          }
+          strId = "dot" + (count + 2);
+          //if(count != 10){
+            document.getElementById(strId).style.backgroundColor = '#777777';
+          //}
+          position = count;
+          count++;
+
+        }, 100);
+        
+
+      })
+    }
+
+    sneaker.onclick = function() {
+      
+      if(count == 11){
+        video.src = "images/" + strPath + "/1_animation_" + strColor + ".mp4";
+        player.load();
+        sneaker.src = "images/" + strPath + "/1_freezeframe_" + strColor + ".jpg";
+        sneaker.style.display = 'block';
+        myCarousel.style.display = 'block';
+        descriptionLabel.style.display = 'none';
+        setTimeout(function() {
+          
+          for(i = 3; i <= 12; i++) {
+            strId = "dot" + i;
+            document.getElementById(strId).style.backgroundColor = '#dddddd';
+          }
+          count = 1;
+          strId = "dot" + (count + 2);
+          if(count != 10){
+            document.getElementById(strId).style.backgroundColor = '#777777';
+          }
+          position = count;
+          count++;
+
+        }, 100);
+        count = 1;
+        stateSneaker = 1;
+        //player.play();
+      } else {
+        player.style.display = 'block';
+        sneaker.style.display = 'none';
+        descriptionLabel.style.display = 'none';
+        player.play(); 
+
+        console.log(count);
+      }
+      
+
+    }
+
+    function currentSlide(n) {
+      if(!player.paused)
+        return;
+      if(n == 1) {
+        strPath = "HeritageBlue";
+        strColor = "blue";
+        sneaker.src = "images/" + strPath + "/" + (position - 1) + "_freezeframe_" + strColor + ".jpg"; 
+        video.src = "images/" + strPath + "/" + position + "_animation_" + strColor + ".mp4"; 
+        player.load();
+
+      } else if (n == 2) {
+        strPath = "JetBlack";
+        strColor = "black";
+        sneaker.src = "images/" + strPath + "/" + (position - 1) + "_freezeframe_" + strColor + ".jpg";
+        video.src = "images/" + strPath + "/" + position + "_animation_" + strColor + ".mp4";
+        player.load();
+
+      } else if (n == 12){
+        position = n - 2;
+
+        for(i = 3; i <= 12; i++) {
+          strId = "dot" + i;
+          document.getElementById(strId).style.backgroundColor = '#dddddd';
+        }
+        strId = "dot" + n;
+        document.getElementById(strId).style.backgroundColor = '#777777';
+
+        sneaker.src = "images/" + strPath + "/" + (n - 3) + "_freezeframe_" + strColor + ".jpg";
+        player.style.display = 'none';
+        sneaker.style.display = 'block';
+
+        descriptionLabel.style.display = 'inline';
+        descriptionLabel.style.position = 'absolute';
+        descriptionLabel.innerHTML = descriptions[position - 2];
+        stateSneaker = 2;
+        count = 11;
+
+      }else {
+        for(i = 3; i <= 12; i++) {
+          strId = "dot" + i;
+          document.getElementById(strId).style.backgroundColor = '#dddddd';
+        }
+        strId = "dot" + n;
+        document.getElementById(strId).style.backgroundColor = '#777777';
+
+        count = n - 2;
+
+        video.src = "images/" + strPath + "/" + (n - 2) + "_animation_" + strColor + ".mp4";
+        player.load();
+        position = n - 2;
+        if (n == 3)
+          n++;
+        sneaker.src = "images/" + strPath + "/" + (n - 3) + "_freezeframe_" + strColor + ".jpg";
+        player.style.display = 'none';
+        sneaker.style.display = 'block';
+
+        descriptionLabel.style.display = 'inline';
+        descriptionLabel.style.position = 'absolute';
+        if(position == 1)
+          descriptionLabel.style.display = 'none';
+        descriptionLabel.innerHTML = descriptions[position - 2];
+        stateSneaker = 2;
+
+      }
+
+    }
+
+  </script>
+</body>
+</html>
