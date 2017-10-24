@@ -74,34 +74,21 @@
         sneaker.src = "images/" + strPath + "/1_freezeframe_" + strColor + ".jpg";
         sneaker.style.display = 'none';
         myCarousel.style.display = 'block';
+    sneaker.style.width = '999px';
         player.style.display = 'block';
         player.play();
       
       }, 2500);
       var i = 0;
       var strId = "";
-
       for(i = 3; i <= 12; i++) {
         strId = "dot" + i;
         document.getElementById(strId).style.backgroundColor = '#dddddd';
       }
-
       strId = "dot" + (count + 1);
       document.getElementById(strId).style.backgroundColor = '#777777';
-
-      $('#player').bind('ended', function() {
-
-        if (stateSneaker == 2 ) {
-          count++;
-          stateSneaker = 1;
-        }
-
-        if( count == 1)
-          count++;
-    
-        sneaker.src = "images/" + strPath + "/" + (count - 1) + "_freezeframe_" + strColor + ".jpg";
-        sneaker.style.display = 'block';
-        sneaker.style.width = '999px';
+      $('#player').bind('ended', function() {  
+        sneaker.style.display = 'block';  
 
         player.style.display = 'none';
         video.src = "images/" + strPath + "/" + count + "_animation_" + strColor + ".mp4";
@@ -169,7 +156,16 @@
         sneaker.style.display = 'none';
         descriptionLabel.style.display = 'none';
         player.play(); 
-        //player.setAttribute('poster',"images/" + strPath + "/" + (position) + "_freezeframe_" + strColor + ".jpg");
+    
+        if (stateSneaker == 2 ) {
+          count++;
+          stateSneaker = 1;
+        }
+
+        if( count == 1)
+          count++;
+    
+        sneaker.src = "images/" + strPath + "/" + (count - 1) + "_freezeframe_" + strColor + ".jpg";
         console.log(count);
       }
       
@@ -227,7 +223,7 @@
 
         video.src = "images/" + strPath + "/" + (n - 2) + "_animation_" + strColor + ".mp4";
         player.setAttribute('poster',"images/" + strPath + "/" + (n - 3) + "_freezeframe_" + strColor + ".jpg");
-    player.load();
+        player.load();
         position = n - 2;
         if (n == 3)
           n++;
